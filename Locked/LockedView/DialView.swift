@@ -34,6 +34,7 @@ private extension DialView {
             VStack(spacing: 10) {
                 if (i % 10 == 0) {
                     dialNumber(i / 10)
+                        .rotationEffect(.degrees(-Double(i) * 3.6 - 180))
                 }
                 
                 Rectangle()
@@ -50,7 +51,6 @@ private extension DialView {
         Text("\(number)")
             .font(.title)
             .foregroundStyle(.white)
-            .rotationEffect(.degrees(-Double(number) * 3.6 - 180))
     }
     
     var baseCircle : some View {
