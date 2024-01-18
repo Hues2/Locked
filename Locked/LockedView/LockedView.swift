@@ -9,10 +9,13 @@ struct LockedView: View {
     }
     
     var body: some View {
-        VStack {
-            title
-            
-            dialView
+        GeometryReader { proxy in
+            VStack {
+                title
+                
+                DialView(width: proxy.size.width)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
@@ -21,9 +24,5 @@ private extension LockedView {
     var title : some View {
         Text("app_title".localizedString)
             .font(CustomFont.extrabold.getFont(dynamicTypeSize: dynamicTypeSize, size: Constants.largeTitle))
-    }
-    
-    var dialView : some View {
-        DialView()
     }
 }

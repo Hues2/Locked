@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct DialView: View {
-    let width = UIScreen.main.bounds.width
+    let width : CGFloat
     
     var body: some View {
         dialView
@@ -12,35 +12,32 @@ struct DialView: View {
 
 private extension DialView {
     var dialView : some View {
-        ZStack {
-            Circle()
-                .fill(Color.gray.opacity(0.3))
-            
-            // Ticks
-            ForEach(0..<100) { i in
-                VStack {
-                    Text("1")
-                    
-                    Rectangle()
-                        .fill(i % 10 == 0 ? Color.primary : Color.gray) // Bigger tick for every 10th mark
-                        .frame(width: 2, height: i % 10 == 0 ? 20 : 10)
-//                        .offset(y: (width - 110) / 2)
-//                        .rotationEffect(.degrees(Double(i) * 3.6))
+        Circle()
+            .fill(Color.gray.opacity(0.3))
+            .overlay {
+                // Ticks
+                ForEach(0..<100) { i in
+                    VStack(spacing: 10) {
+                        if (i % 10 == 0) {
+                            Text("\(i / 10)")
+                                .font(.title)
+                                .rotationEffect(.degrees(-Double(i) * 3.6 - 180))
+                        }
+                        
+                        Rectangle()
+                            .fill(i % 10 == 0 ? Color.primary : Color.gray) // Bigger tick for every 10th mark
+                            .frame(width: 2, height: i % 10 == 0 ? 20 : 10)
+                    }
+                    .offset(y: (i % 10 == 0) ? -25 : 0)
+                    .offset(y: (width - 70) / 2)
+                    .rotationEffect(.degrees(Double(i) * 3.6 - 180))
                 }
-                .offset(y: (width - 110) / 2)
-                .rotationEffect(.degrees(Double(i) * 3.6))
             }
-            
-            // Numbers
-//            ForEach(0..<10) { number in
-//                Text("\(number)")
-//                    .font(.title)
-////                    .rotationEffect(.degrees(Double(-number) * 36))
-//                    .offset(y: -180)
-//                    .rotationEffect(.degrees(Double(number) * 36))
-//                    .offset
-//            }
-        }
-        .frame(width: width - 85, height: width - 85)
+            .overlay {
+                // Knob of the lock
+                Circle()
+                    .fill(Color.gray.opacity(0.5))
+                    .frame(width: 60, height: 60)
+            }
     }
 }
