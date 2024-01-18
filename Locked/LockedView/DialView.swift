@@ -25,6 +25,7 @@ private extension DialView {
                 baseCircle
                 secondCircle
                 thirdCircle
+                fourthCircle
             }
         )
     }
@@ -39,7 +40,7 @@ private extension DialView {
                 
                 Rectangle()
                     .fill(i % 10 == 0 ? .white : .gray) // Bigger tick for every 10th mark
-                    .frame(width: 2, height: i % 10 == 0 ? 20 : 10)
+                    .frame(width: 3, height: i % 10 == 0 ? 20 : 10)
             }
             .offset(y: (i % 10 == 0) ? -25 : 0)
             .offset(y: (maxWidth - (padding * 2)) / 2)
@@ -62,17 +63,28 @@ private extension DialView {
             DialCircle(width: maxWidth / 1.9, colour: .black, shouldApplyShadow: true)
             DialCircle(width: maxWidth / 2, colour: .secondCircle, shouldApplyShadow: false)
                 .overlay(alignment: .top) {
-                    Rectangle()
-                        .fill(.red)
-                        .frame(width: 3, height: (maxWidth / 2) / 2)
+                    redMarker
                 }
         }
+    }
+    
+    var redMarker : some View {
+        Rectangle()
+            .fill(.red)
+            .frame(width: 3, height: (maxWidth / 2) / 2)                        
     }
     
     var thirdCircle : some View {
         Group {
             DialCircle(width: maxWidth / 2.9, colour: .black, shouldApplyShadow: true)
             DialCircle(width: maxWidth / 3.1, colour: .secondCircle, shouldApplyShadow: false)
+        }
+    }
+    
+    var fourthCircle : some View {
+        Group {
+            DialCircle(width: maxWidth / 3.9, colour: .black, shouldApplyShadow: true)
+            DialCircle(width: maxWidth / 4.1, colour: .secondCircle, shouldApplyShadow: false)
         }
     }
 }
