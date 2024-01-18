@@ -5,13 +5,12 @@ struct DialView: View {
     @State var maxWidth : CGFloat
     
     init(width: CGFloat) {
-        self.maxWidth = width
+        self.maxWidth = width - padding
     }
     
     var body: some View {
         dialView
             .padding(padding)
-            .border(.red)
     }
 }
 
@@ -24,22 +23,45 @@ private extension DialView {
                     if (i % 10 == 0) {
                         Text("\(i / 10)")
                             .font(.title)
+                            .foregroundStyle(.white)
                             .rotationEffect(.degrees(-Double(i) * 3.6 - 180))
                     }
                     
                     Rectangle()
-                        .fill(i % 10 == 0 ? Color.primary : Color.gray) // Bigger tick for every 10th mark
+                        .fill(i % 10 == 0 ? .white : .gray) // Bigger tick for every 10th mark
                         .frame(width: 2, height: i % 10 == 0 ? 20 : 10)
                 }
                 .offset(y: (i % 10 == 0) ? -25 : 0)
-                .offset(y: ((maxWidth - Constants.phonePadding) - (padding * 2)) / 2)
+                .offset(y: (maxWidth - (padding * 2)) / 2)
                 .rotationEffect(.degrees(Double(i) * 3.6 - 180))
             }
         }
-        .frame(maxWidth: (maxWidth - padding), maxHeight: (maxWidth - padding))
+        .frame(maxWidth: maxWidth, maxHeight: maxWidth)
+        .border(.red)
         .background(
-            Circle()
-                .fill(Color.gray.opacity(0.3))
+            ZStack(alignment: .center) {
+                Circle()
+                    .fill(Color.firstCircle)
+                    .shadow(color: .black.opacity(0.5), radius: 3, x: -5, y: 5)
+                Group {
+                    Circle()
+                        .fill(Color.black)
+                        .frame(width: maxWidth / 1.9)
+                        .shadow(color: .black.opacity(0.5), radius: 3, x: -5, y: 5)
+                    Circle()
+                        .fill(Color.secondCircle)
+                        .frame(width: maxWidth / 2)
+                }
+                Group {
+                    Circle()
+                        .fill(Color.black)
+                        .frame(width: maxWidth / 2.9)
+                        .shadow(color: .black.opacity(0.5), radius: 3, x: -5, y: 5)
+                    Circle()
+                        .fill(Color.secondCircle)
+                        .frame(width: maxWidth / 3.1)
+                }
+            }
         )
     }
 }
