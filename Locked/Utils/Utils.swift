@@ -1,6 +1,10 @@
 import SwiftUI
 
 class Utils {
+    static func isIpad() -> Bool {
+        UIDevice.current.userInterfaceIdiom == .pad
+    }
+    
     static func adjustedFontSize(dynamicTypeSize: DynamicTypeSize, size: CGFloat) -> CGFloat {
         switch dynamicTypeSize {
         case .xSmall:

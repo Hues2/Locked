@@ -13,4 +13,9 @@ class Constants {
     static let footnote : CGFloat = 13.0
     static let caption1 : CGFloat = 12.0
     static let caption2 : CGFloat = 11.0
+    
+    // Padding
+    static let phonePadding : CGFloat = 20
+    static let tabletPadding : CGFloat = 80
+    static let padding : CGFloat = Utils.isIpad() ? tabletPadding : phonePadding
 }
