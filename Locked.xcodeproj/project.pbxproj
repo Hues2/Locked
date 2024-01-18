@@ -29,6 +29,7 @@
 		2EB832552B5882D40038E67F /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB832542B5882D40038E67F /* View.swift */; };
 		2EB8325B2B588E140038E67F /* DialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB8325A2B588E140038E67F /* DialView.swift */; };
 		2EBA98A22B599495001FF0CC /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBA98A12B599495001FF0CC /* Color.swift */; };
+		2EED8D152B59C2D100D80E17 /* NumbersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EED8D142B59C2D100D80E17 /* NumbersView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		2EB832542B5882D40038E67F /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		2EB8325A2B588E140038E67F /* DialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialView.swift; sourceTree = "<group>"; };
 		2EBA98A12B599495001FF0CC /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		2EED8D142B59C2D100D80E17 /* NumbersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				2E9D00772B58657E00BDB843 /* LockedView.swift */,
 				2E9D00802B58672500BDB843 /* LockedViewModel.swift */,
 				2EB8325A2B588E140038E67F /* DialView.swift */,
+				2EED8D142B59C2D100D80E17 /* NumbersView.swift */,
 			);
 			path = LockedView;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EB8325B2B588E140038E67F /* DialView.swift in Sources */,
+				2EED8D152B59C2D100D80E17 /* NumbersView.swift in Sources */,
 				2E9D00812B58672500BDB843 /* LockedViewModel.swift in Sources */,
 				2EBA98A22B599495001FF0CC /* Color.swift in Sources */,
 				2E9D00782B58657E00BDB843 /* LockedView.swift in Sources */,

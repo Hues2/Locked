@@ -13,9 +13,16 @@ struct LockedView: View {
             VStack {
                 title
                 
+                Spacer()
+                NumbersView()
+                
+                Spacer()
                 DialView(width: proxy.size.width)
+                
+                Spacer()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .padding(Constants.padding)
         }
     }
 }
@@ -23,6 +30,6 @@ struct LockedView: View {
 private extension LockedView {
     var title : some View {
         Text("app_title".localizedString)
-            .font(CustomFont.extrabold.getFont(dynamicTypeSize: dynamicTypeSize, size: Constants.largeTitle))
+            .font(CustomFont.extrabold.getFont(dynamicTypeSize: dynamicTypeSize, size: 50))
     }
 }

@@ -3,14 +3,17 @@ import SwiftUI
 struct DialView: View {
     let padding : CGFloat = Constants.padding
     @State var maxWidth : CGFloat
+    @State var isAnimating : Bool = false
     
     init(width: CGFloat) {
         self.maxWidth = width - padding
     }
     
     var body: some View {
-        dialView
-            .padding(padding)
+        VStack {
+            dialView
+            
+        }
     }
 }
 
