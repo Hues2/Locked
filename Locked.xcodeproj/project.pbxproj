@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E2BCA802B59A43B00BCF3DA /* DialCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BCA7F2B59A43B00BCF3DA /* DialCircle.swift */; };
 		2E9D00682B58651C00BDB843 /* LockedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9D00672B58651C00BDB843 /* LockedApp.swift */; };
 		2E9D006A2B58651C00BDB843 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9D00692B58651C00BDB843 /* ContentView.swift */; };
 		2E9D006C2B58652000BDB843 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E9D006B2B58652000BDB843 /* Assets.xcassets */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E2BCA7F2B59A43B00BCF3DA /* DialCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialCircle.swift; sourceTree = "<group>"; };
 		2E9D00642B58651C00BDB843 /* Locked.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Locked.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E9D00672B58651C00BDB843 /* LockedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedApp.swift; sourceTree = "<group>"; };
 		2E9D00692B58651C00BDB843 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		2EB832592B588DE60038E67F /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2E2BCA7F2B59A43B00BCF3DA /* DialCircle.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 				2E9D007D2B5865EA00BDB843 /* String.swift in Sources */,
 				2E9D00682B58651C00BDB843 /* LockedApp.swift in Sources */,
 				2EB832512B587AC20038E67F /* Constants.swift in Sources */,
+				2E2BCA802B59A43B00BCF3DA /* DialCircle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
