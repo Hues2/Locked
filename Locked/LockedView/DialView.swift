@@ -3,7 +3,8 @@ import SwiftUI
 struct DialView: View {
     let padding : CGFloat = Constants.padding
     @State var maxWidth : CGFloat
-    @State var isAnimating : Bool = false
+    @State private var sliderValue: Double = 5
+    @State private var angleValue : Double = .zero
     
     init(width: CGFloat) {
         self.maxWidth = width - padding
@@ -12,7 +13,14 @@ struct DialView: View {
     var body: some View {
         VStack {
             dialView
-            
+            Slider(value: $sliderValue, in: 0...9, step: 1)
+                .onChange(of: sliderValue, { _, newValue in
+                    withAnimation(.easeInOut(duration: 1)) {
+                        let rotationAngle = (newValue - 5) * 36.0
+                        self.angleValue = rotationAngle
+                        Utils.triggerHapticFeedback(style: .medium)
+                    }
+                })
         }
     }
 }
@@ -21,6 +29,7 @@ private extension DialView {
     var dialView : some View {
         ZStack {
             ticks
+                .rotationEffect(Angle(degrees: angleValue))
         }
         .frame(maxWidth: maxWidth, maxHeight: maxWidth)
         .background(
