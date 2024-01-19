@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct LockedView: View {
-    @StateObject private var lockedViewModel : LockedViewModel   
+    @StateObject private var viewModel : LockedViewModel
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     
     init(lockManager : LockManager) {
-        self._lockedViewModel = StateObject(wrappedValue: LockedViewModel(lockManager : lockManager))
+        self._viewModel = StateObject(wrappedValue: LockedViewModel(lockManager : lockManager))
     }
     
     var body: some View {
@@ -17,7 +17,7 @@ struct LockedView: View {
                 NumbersView()
                 
                 Spacer()
-                DialView(width: proxy.size.width)
+                DialView(viewModel: viewModel, width: proxy.size.width)
                 
                 Spacer()
             }

@@ -1,27 +1,66 @@
 import SwiftUI
 
 struct DialView: View {
-    let padding : CGFloat = Constants.padding
+    @ObservedObject private var viewModel : LockedViewModel
     @State var maxWidth : CGFloat
-    @State private var sliderValue: Double = 5
-    @State private var angleValue : Double = .zero
+    let padding : CGFloat = Constants.padding
     
-    init(width: CGFloat) {
-        self.maxWidth = width - padding
+    // Spin movement
+    @State private var angle: Double = .zero
+    @State private var lastAngle: Double = .zero
+    private let tickCount = Constants.numberOfTicks
+    private let degreesPerTick = (360.0 / Double(Constants.numberOfTicks))
+    private let spinSensitivity : Double = 2 // The lower the number, the more sensitivity
+    private let snapAngles = (0..<Constants.numberOfTicks).map { Double($0 * (360 / Constants.numberOfTicks)) }
+    private let hapticThreshold: Double = 5.0
+    
+    init(viewModel: LockedViewModel, width: CGFloat) {
+        self.viewModel = viewModel
+        self.maxWidth = (width - padding)
     }
     
     var body: some View {
         VStack {
             dialView
-            Slider(value: $sliderValue, in: 0...9, step: 1)
-                .onChange(of: sliderValue, { _, newValue in
-                    withAnimation(.easeInOut(duration: 1)) {
-                        let rotationAngle = (newValue - 5) * 36.0
-                        self.angleValue = rotationAngle
+        }
+        .gesture(
+            DragGesture()
+                .onChanged { gesture in
+                    let startLocation = gesture.startLocation
+                    let midScreen = UIScreen.main.bounds.width / 2
+                    let isRightSideSwipe = startLocation.x > midScreen
+                    
+                    let verticalDrag = gesture.translation.height
+                    let rotationalChange = verticalDrag / spinSensitivity
+                    
+                    withAnimation {
+                        if isRightSideSwipe {
+                            angle = lastAngle + rotationalChange // Spin right if swiping on the right
+                        } else {
+                            angle = lastAngle - rotationalChange // Spin left if swiping on the left
+                        }
+                    }
+                    
+                    
+                    let normalizedAngle = viewModel.normalize(angle: angle)
+                    if snapAngles.contains(where: { abs(Double($0) - normalizedAngle) < hapticThreshold }) {
                         Utils.triggerHapticFeedback(style: .medium)
                     }
-                })
-        }
+                }
+                .onEnded { _ in
+                    withAnimation {
+                        angle = snapToClosestAngle(to: angle)
+                    }
+                    lastAngle = angle
+                    Utils.triggerHapticFeedback(style: .medium)
+                }
+        )
+    }
+    
+    func snapToClosestAngle(to angle: Double) -> Double {
+        let divisor = degreesPerTick
+        let index = (angle / divisor).rounded()
+        return index * divisor
     }
 }
 
@@ -29,7 +68,7 @@ private extension DialView {
     var dialView : some View {
         ZStack {
             ticks
-                .rotationEffect(Angle(degrees: angleValue))
+                .rotationEffect(Angle(degrees: angle))
         }
         .frame(maxWidth: maxWidth, maxHeight: maxWidth)
         .background(
@@ -43,18 +82,18 @@ private extension DialView {
     }
     
     var ticks : some View {
-        ForEach(0..<100) { i in
+        ForEach(Array(0..<Constants.numberOfTotalTicks), id: \.self) { i in
             VStack(spacing: 10) {
-                if (i % 10 == 0) {
+                if (i % Constants.numberOfTicks == 0) {
                     dialNumber(i / 10)
                         .rotationEffect(.degrees(-Double(i) * 3.6 - 180))
                 }
                 
                 Rectangle()
-                    .fill(i % 10 == 0 ? .white : .gray) // Bigger tick for every 10th mark
+                    .fill(i % Constants.numberOfTicks == 0 ? .white : .gray) // Bigger tick for every 10th mark
                     .frame(width: 3, height: i % 10 == 0 ? 20 : 10)
             }
-            .offset(y: (i % 10 == 0) ? -25 : 0)
+            .offset(y: (i % Constants.numberOfTicks == 0) ? -25 : 0)
             .offset(y: (maxWidth - (padding * 2)) / 2)
             .rotationEffect(.degrees(Double(i) * 3.6 - 180))
         }
@@ -83,7 +122,7 @@ private extension DialView {
     var redMarker : some View {
         Rectangle()
             .fill(.red)
-            .frame(width: 3, height: (maxWidth / 2) / 2)                        
+            .frame(width: 3, height: (maxWidth / 2) / 2)
     }
     
     var thirdCircle : some View {

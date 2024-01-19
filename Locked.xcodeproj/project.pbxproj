@@ -92,6 +92,7 @@
 			children = (
 				2EB8323D2B5874A10038E67F /* Info.plist */,
 				2E9D00752B58653900BDB843 /* App */,
+				2EED8D162B59F00A00D80E17 /* Models */,
 				2E9D00792B58659D00BDB843 /* Managers */,
 				2E9D00762B58656300BDB843 /* LockedView */,
 				2EB832592B588DE60038E67F /* Components */,
@@ -196,6 +197,13 @@
 				2E2BCA7F2B59A43B00BCF3DA /* DialCircle.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		2EED8D162B59F00A00D80E17 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
