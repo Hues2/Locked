@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2E2BCA802B59A43B00BCF3DA /* DialCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2BCA7F2B59A43B00BCF3DA /* DialCircle.swift */; };
+		2E969F5E2B5A0CF900238834 /* DialButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E969F5D2B5A0CF900238834 /* DialButtonModifier.swift */; };
+		2E969F602B5A0FEE00238834 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E969F5F2B5A0FEE00238834 /* Array.swift */; };
 		2E9D00682B58651C00BDB843 /* LockedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9D00672B58651C00BDB843 /* LockedApp.swift */; };
 		2E9D006A2B58651C00BDB843 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9D00692B58651C00BDB843 /* ContentView.swift */; };
 		2E9D006C2B58652000BDB843 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E9D006B2B58652000BDB843 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 
 /* Begin PBXFileReference section */
 		2E2BCA7F2B59A43B00BCF3DA /* DialCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialCircle.swift; sourceTree = "<group>"; };
+		2E969F5D2B5A0CF900238834 /* DialButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DialButtonModifier.swift; sourceTree = "<group>"; };
+		2E969F5F2B5A0FEE00238834 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		2E9D00642B58651C00BDB843 /* Locked.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Locked.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E9D00672B58651C00BDB843 /* LockedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedApp.swift; sourceTree = "<group>"; };
 		2E9D00692B58651C00BDB843 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				2E9D007C2B5865EA00BDB843 /* String.swift */,
 				2EB832542B5882D40038E67F /* View.swift */,
 				2EBA98A12B599495001FF0CC /* Color.swift */,
+				2E969F5F2B5A0FEE00238834 /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 		2EB832562B58830D0038E67F /* ViewModifiers */ = {
 			isa = PBXGroup;
 			children = (
+				2E969F5D2B5A0CF900238834 /* DialButtonModifier.swift */,
 			);
 			path = ViewModifiers;
 			sourceTree = "<group>";
@@ -290,6 +296,7 @@
 				2EBA98A22B599495001FF0CC /* Color.swift in Sources */,
 				2E9D00782B58657E00BDB843 /* LockedView.swift in Sources */,
 				2EB832552B5882D40038E67F /* View.swift in Sources */,
+				2E969F602B5A0FEE00238834 /* Array.swift in Sources */,
 				2EB832532B5881150038E67F /* Utils.swift in Sources */,
 				2EB832382B5867A90038E67F /* LockManager.swift in Sources */,
 				2E9D006A2B58651C00BDB843 /* ContentView.swift in Sources */,
@@ -297,6 +304,7 @@
 				2E9D00682B58651C00BDB843 /* LockedApp.swift in Sources */,
 				2EB832512B587AC20038E67F /* Constants.swift in Sources */,
 				2E2BCA802B59A43B00BCF3DA /* DialCircle.swift in Sources */,
+				2E969F5E2B5A0CF900238834 /* DialButtonModifier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

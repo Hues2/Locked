@@ -1,6 +1,8 @@
 import Combine
+import SwiftUI
 
 class LockedViewModel : ObservableObject {
+    private var answer : [Int] = []
     @Published var attempt : [Int] = []
     
     // Dependencies
@@ -14,16 +16,17 @@ class LockedViewModel : ObservableObject {
     }
     
     private func addSubscriptions() {
-        subscribeToAttempt()
+        subscribeToAnswer()
     }
 }
 
 // MARK: - Subscriptions
 private extension LockedViewModel {
-    func subscribeToAttempt() {
-        self.$attempt
-            .sink { [weak self] updatedAttempt in
-                print(updatedAttempt)
+    func subscribeToAnswer() {
+        self.lockManager.$answer
+            .sink { [weak self] returnedAnswer in
+                guard let self else { return }
+                self.answer = returnedAnswer
             }
             .store(in: &cancellables)
     }
@@ -39,6 +42,20 @@ extension LockedViewModel {
         // Calculate the dial value from the normalized angle
         let value = Int((normalizedAngle / 36.0).rounded()) % 10
         attempt.append(value)
+    }
+}
+
+// MARK: - Get numbr colour
+extension LockedViewModel {
+    func getNumberColour(index : Int) -> Color {
+        guard let number = self.attempt[safe: index] else { return .red }
+        if number == self.answer[safe: index] {
+            return .green
+        }
+        if self.answer.contains(number) {
+            return .yellow
+        }
+        return .red
     }
 }
 

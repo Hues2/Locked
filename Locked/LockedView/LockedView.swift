@@ -14,7 +14,7 @@ struct LockedView: View {
                 title
                 
                 Spacer()
-                NumbersView()
+                NumbersView(viewModel: viewModel)
                 
                 Spacer()
                 DialView(viewModel: viewModel, width: proxy.size.width)
@@ -30,6 +30,6 @@ struct LockedView: View {
 private extension LockedView {
     var title : some View {
         Text("app_title".localizedString)
-            .font(CustomFont.extrabold.getFont(dynamicTypeSize: dynamicTypeSize, size: 50))
+            .font(CustomFont.extrabold.getFont(dynamicTypeSize: dynamicTypeSize, size: Constants.extraLargeTitle))
     }
 }

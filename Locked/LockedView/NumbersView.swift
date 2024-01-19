@@ -1,22 +1,30 @@
 import SwiftUI
 
 struct NumbersView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @ObservedObject var viewModel : LockedViewModel
     
     var body: some View {
         HStack {
-            numberView
-            numberView
-            numberView
-            numberView
-            numberView
-        }        
+            ForEach(0..<5) { i in
+                numberView(i)
+            }
+        }
     }
 }
 
 private extension NumbersView {
-    var numberView : some View {
-        VStack {
-            Text("")
+    func numberView(_ index : Int) -> some View {
+        VStack(spacing: 0) {
+            if let number = viewModel.attempt[safe: index] {
+                Text("\(number)")
+                    .font(CustomFont.extrabold.getFont(dynamicTypeSize: dynamicTypeSize, size: Constants.extraLargeTitle))
+                    .foregroundStyle(viewModel.getNumberColour(index: index))
+                    .transition(.scale)
+            } else {
+                Text("")
+                    .font(CustomFont.extrabold.getFont(dynamicTypeSize: dynamicTypeSize, size: Constants.extraLargeTitle))
+            }
             dash
         }
     }

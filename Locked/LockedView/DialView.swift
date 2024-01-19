@@ -20,44 +20,41 @@ struct DialView: View {
     }
     
     var body: some View {
-        VStack {
-            dialView
-        }
-        .gesture(
-            DragGesture()
-                .onChanged { gesture in
-                    let startLocation = gesture.startLocation
-                    let midScreen = UIScreen.main.bounds.width / 2
-                    let isRightSideSwipe = startLocation.x > midScreen
-                    
-                    let verticalDrag = gesture.translation.height
-                    let rotationalChange = verticalDrag / spinSensitivity
-                    
-                    withAnimation {
-                        if isRightSideSwipe {
-                            angle = lastAngle + rotationalChange // Spin right if swiping on the right
-                        } else {
-                            angle = lastAngle - rotationalChange // Spin left if swiping on the left
+        dialView
+            .gesture(
+                DragGesture()
+                    .onChanged { gesture in
+                        let startLocation = gesture.startLocation
+                        let midScreen = UIScreen.main.bounds.width / 2
+                        let isRightSideSwipe = startLocation.x > midScreen
+                        
+                        let verticalDrag = gesture.translation.height
+                        let rotationalChange = verticalDrag / spinSensitivity
+                        
+                        withAnimation(.easeOut(duration: 1)) {
+                            if isRightSideSwipe {
+                                angle = lastAngle + rotationalChange // Spin right if swiping on the right
+                            } else {
+                                angle = lastAngle - rotationalChange // Spin left if swiping on the left
+                            }
+                        }
+                        
+                        let normalizedAngle = viewModel.normalize(angle: angle)
+                        if snapAngles.contains(where: { abs(Double($0) - normalizedAngle) < hapticThreshold }) {
+                            Utils.triggerHapticFeedback(style: .medium)
                         }
                     }
-                    
-                    
-                    let normalizedAngle = viewModel.normalize(angle: angle)
-                    if snapAngles.contains(where: { abs(Double($0) - normalizedAngle) < hapticThreshold }) {
+                    .onEnded { _ in
+                        withAnimation(.easeOut(duration: 1)) {
+                            angle = snapToClosestAngle(to: angle)
+                        }
+                        lastAngle = angle
                         Utils.triggerHapticFeedback(style: .medium)
                     }
-                }
-                .onEnded { _ in
-                    withAnimation {
-                        angle = snapToClosestAngle(to: angle)
-                    }
-                    lastAngle = angle
-                    Utils.triggerHapticFeedback(style: .medium)
-                }
-        )
+            )
     }
     
-    func snapToClosestAngle(to angle: Double) -> Double {
+    private func snapToClosestAngle(to angle: Double) -> Double {
         let divisor = degreesPerTick
         let index = (angle / divisor).rounded()
         return index * divisor
@@ -76,7 +73,7 @@ private extension DialView {
                 baseCircle
                 secondCircle
                 thirdCircle
-                fourthCircle
+                dialButton
             }
         )
     }
@@ -132,10 +129,17 @@ private extension DialView {
         }
     }
     
-    var fourthCircle : some View {
-        Group {
-            DialCircle(width: maxWidth / 3.9, colour: .black, shouldApplyShadow: true)
-            DialCircle(width: maxWidth / 4.1, colour: .secondCircle, shouldApplyShadow: false)
+    var dialButton : some View {
+        Button {
+            withAnimation(.spring(duration: 0.6, bounce: 0.4, blendDuration: 1)) {
+                viewModel.setNumber(angle: angle)
+            }
+        } label: {
+            ZStack {
+                DialCircle(width: maxWidth / 3.9, colour: .black, shouldApplyShadow: true)
+                DialCircle(width: maxWidth / 4.1, colour: .secondCircle, shouldApplyShadow: false)
+            }
         }
+        .buttonStyle(DialButtonModifier())
     }
 }

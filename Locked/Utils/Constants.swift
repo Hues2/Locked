@@ -11,6 +11,7 @@ class Constants {
     static let padding : CGFloat = Utils.isIpad() ? tabletPadding : phonePadding
     
     // MARK: - Font Sizes
+    static let extraLargeTitle : CGFloat = 50.0
     static let largeTitle : CGFloat = 34.0
     static let title1 : CGFloat = 28.0
     static let title2 : CGFloat = 22.0
